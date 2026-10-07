@@ -11,12 +11,69 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      /* Imagen de fondo local repetida como patrón o ajustada */
-      background: #f7e6ca url('fondo.png') repeat fixed center top;
-      background-size: 500px auto; /* Mantiene el tamaño ideal del patrón */
+      background: #f7e6ca url('fondo.jpg') repeat fixed center top;
+      background-size: 500px auto;
       display: flex;
       min-height: 100vh;
       color: #333;
+    }
+
+    /* SALVAPANTALLAS / SCREENSAVER DE INACTIVIDAD */
+    #screensaver {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #8B1E0F;
+      background: radial-gradient(circle, #a82513 0%, #4a0d05 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    #screensaver.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #screensaver img {
+      max-width: 60vmin;
+      max-height: 60vmin;
+      object-fit: contain;
+      animation: pulseLogo 2.5s infinite ease-in-out;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+    }
+
+    #screensaver .screensaver-text {
+      color: #F1C40F;
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-top: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+      animation: blinkText 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.06);
+      }
+    }
+
+    @keyframes blinkText {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.3; }
     }
 
     /* BARRA LATERAL IZQUIERDA */
@@ -82,7 +139,7 @@
       flex: 1;
       padding: 25px 35px;
       overflow-y: auto;
-      background-color: rgba(255, 255, 255, 0.92); /* Capa clara para leer perfectamente */
+      background-color: rgba(255, 255, 255, 0.92);
       margin: 20px;
       border-radius: 16px;
       border: 3px solid #8B1E0F;
@@ -250,6 +307,12 @@
 </head>
 <body>
 
+  <!-- PANTALLA COMPLETA DE INACTIVIDAD (SCREENSAVER) -->
+  <div id="screensaver">
+    <img src="logo.png" alt="Freddy Fazbear's Burgers Logo">
+    <div class="screensaver-text">Toca la pantalla para ordenar</div>
+  </div>
+
   <!-- BARRA LATERAL -->
   <aside class="sidebar">
     <div class="logo-container">
@@ -347,6 +410,7 @@
   </aside>
 
   <script>
+    /* LÓGICA DEL CARRITO */
     let cart = [];
 
     function addToCart(product, price) {
@@ -358,7 +422,7 @@
       const cartItems = document.getElementById('cart-items');
       cartItems.innerHTML = '';
       let total = 0;
-      cart.forEach((item, index) => {
+      cart.forEach((item) => {
         const li = document.createElement('li');
         li.innerHTML = `<span>${item.product}</span> <strong>$${item.price.toFixed(2)}</strong>`;
         cartItems.appendChild(li);
@@ -380,6 +444,36 @@
         clearCart();
       }
     }
+
+    /* LÓGICA DE INACTIVIDAD (SALVAPANTALLAS) */
+    const INACTIVITY_TIME = 20000; // Tiempo en milisegundos (20 segundos)
+    let inactivityTimer;
+    const screensaver = document.getElementById('screensaver');
+
+    function showScreensaver() {
+      screensaver.classList.add('active');
+    }
+
+    function hideScreensaver() {
+      if (screensaver.classList.contains('active')) {
+        screensaver.classList.remove('active');
+      }
+      resetInactivityTimer();
+    }
+
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(showScreensaver, INACTIVITY_TIME);
+    }
+
+    // Escuchar cualquier interacción del usuario para resetear el temporizador o salir del salvapantallas
+    const activityEvents = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
+    activityEvents.forEach(event => {
+      window.addEventListener(event, hideScreensaver, { passive: true });
+    });
+
+    // Iniciar temporizador al cargar la página
+    resetInactivityTimer();
   </script>
 </body>
 </html>
