@@ -3,34 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiosco Wendy's Style</title>
+  <title>Freddy Fazbear's Burgers - Kiosco</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff;
+      font-family: 'Arial Black', Arial, sans-serif;
+      /* SEGUNDA IMAGEN COMO FONDO DEL SITIO (image_1.png) */
+      background-image: url('https://lh3.googleusercontent.com/d/1XgXo946-b33pCHV9YJ7n_A4Qp4W1vPsh');
+      background-size: cover;
+      background-attachment: fixed;
       display: flex;
       min-height: 100vh;
       flex-direction: row;
     }
     .sidebar {
-      width: 220px;
-      background-color: #c8102e;
+      width: 240px;
+      background-color: #8B1E0F; /* Rojo oscuro característico */
+      border-right: 4px solid #F39C12; /* Borde amarillo */
       color: white;
       display: flex;
       flex-direction: column;
-      padding: 10px;
+      align-items: center;
+      padding: 20px 10px;
+      box-sizing: border-box;
     }
-    .sidebar h2 { text-align: center; margin-bottom: 15px; }
+    /* PRIMER IMAGEN COMO LOGO PRINCIPAL (image_0.png) */
+    .logo {
+      width: 150px;
+      height: 150px;
+      background-image: url('https://lh3.googleusercontent.com/d/1W_y4vQ87Uo9_b67Y-y6vIq7rUo5w8nSh');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-bottom: 20px;
+    }
+    .sidebar h2 { 
+      text-align: center; 
+      margin-bottom: 25px; 
+      font-size: 1.2rem;
+      color: #F39C12;
+      text-shadow: 2px 2px 0px #000;
+    }
     .sidebar a {
-      padding: 12px; margin: 5px 0;
-      background-color: #f5f5f5; color: #c8102e;
-      text-decoration: none; border-radius: 5px;
+      width: 90%;
+      padding: 12px; margin: 6px 0;
+      background-color: #F39C12; color: #FFF;
+      text-decoration: none; border-radius: 8px;
       text-align: center; font-weight: bold;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      transition: transform 0.1s;
     }
-    .sidebar a:hover { background-color: #e0e0e0; }
-    .main { flex: 1; padding: 20px; overflow-y: auto; }
-    .main h1 { text-align: center; margin-bottom: 20px; color: #c8102e; }
+    .sidebar a:hover { 
+      background-color: #E67E22; 
+      transform: scale(1.05);
+    }
+    
+    .main { 
+      flex: 1; 
+      padding: 20px; 
+      overflow-y: auto; 
+      background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco translúcido para legibilidad */
+      margin: 15px;
+      border-radius: 15px;
+      border: 3px solid #8B1E0F;
+    }
+    .main h1 { 
+      text-align: center; 
+      margin-bottom: 30px; 
+      color: #8B1E0F; 
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 0px #F39C12, 4px 4px 0px #000;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -38,91 +82,88 @@
       margin-bottom: 40px;
     }
     .card {
-      background: white; border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background: white; border-radius: 15px;
+      border: 3px solid #000;
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.85);
       padding: 15px; text-align: center;
       transition: transform 0.2s;
     }
-    .card:hover { transform: scale(1.05); }
+    .card:hover { transform: scale(1.03); }
     .card img { 
       width: 100%; 
       height: 150px; 
       object-fit: cover; 
       border-radius: 10px; 
+      border: 2px solid #000;
     }
-    .price { font-weight: bold; color: #c8102e; margin: 10px 0; }
+    .card h3 {
+      color: #8B1E0F;
+      margin: 10px 0 5px 0;
+    }
+    .price { font-weight: bold; color: #E67E22; margin: 10px 0; font-size: 1.2rem; }
     button {
-      background-color: #c8102e; border: none;
-      padding: 10px 15px; border-radius: 5px;
+      background-color: #8B1E0F; border: 2px solid #000;
+      padding: 10px 15px; border-radius: 8px;
       font-weight: bold; color: white; cursor: pointer;
+      box-shadow: 3px 3px 0px #000;
     }
-    button:hover { background-color: #a60d24; }
+    button:hover { background-color: #A32A1B; }
+    
     .cart {
-      width: 250px; background-color: #f5f5f5;
-      border-left: 2px solid #c8102e;
+      width: 260px; 
+      background-color: rgba(245, 245, 245, 0.9);
+      border-left: 4px solid #8B1E0F;
       padding: 15px; display: flex; flex-direction: column;
+      margin: 15px 15px 15px 0;
+      border-radius: 15px;
+      border: 3px solid #8B1E0F;
     }
-    .cart h2 { text-align: center; color: #c8102e; }
+    .cart h2 { text-align: center; color: #8B1E0F; text-shadow: 1px 1px 0px #F39C12; }
     .cart ul { list-style: none; padding: 0; }
-    .cart li { margin: 5px 0; font-size: 14px; }
-    .cart-total { font-weight: bold; margin-top: 10px; text-align: center; }
-    .cart button { margin-top: 10px; }
+    .cart li { margin: 8px 0; font-size: 14px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+    .cart-total { font-weight: bold; margin-top: 15px; text-align: center; font-size: 1.1rem; color: #8B1E0F; }
+    .cart button { margin-top: 10px; width: 100%; }
+    
     @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .sidebar { width: 100%; flex-direction: row; overflow-x: auto; }
-      .sidebar a { flex: 1; margin: 5px; min-width: 120px; }
-      .cart { width: 100%; border-left: none; border-top: 2px solid #c8102e; }
+      body { flex-direction: column; background-size: auto; }
+      .sidebar { width: 100%; flex-direction: column; border-right: none; border-bottom: 4px solid #F39C12; }
+      .sidebar a { width: 45%; margin: 5px; }
+      .sidebar-links { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .cart { width: auto; margin: 15px; border-left: 3px solid #8B1E0F; }
     }
   </style>
 </head>
 <body>
   <div class="sidebar">
-    <h2>🍔 Menú</h2>
-    <a href="#burgers">Hamburguesas</a>
-    <a href="#chicken">Pollo</a>
-    <a href="#salads">Ensaladas</a>
-    <a href="#drinks">Bebidas</a>
-    <a href="#desserts">Postres</a>
+    <!-- Logotipo Principal -->
+    <div class="logo"></div>
+    <h2>🎪 FAZBEAR MENU</h2>
+    <div class="sidebar-links">
+      <a href="#burgers">Hamburguesas</a>
+      <a href="#chicken">Pollo</a>
+      <a href="#salads">Ensaladas</a>
+      <a href="#drinks">Bebidas</a>
+      <a href="#desserts">Postres</a>
+    </div>
   </div>
 
   <div class="main">
-    <h1>Kiosco Wendy's Style</h1>
+    <h1>Freddy Fazbear's Burgers</h1>
     
     <div class="grid" id="burgers">
       <div class="card">
         <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500&auto=format&fit=crop&q=80" alt="Hamburguesa Baconator">
         <h3>Baconator</h3>
         <p class="price">$7.99</p>
-        <p>Doble carne, doble queso y mucho tocino.</p>
+        <p>Doble carne, doble queso y mucho tocino al estilo Fazbear.</p>
         <button onclick="addToCart('Baconator', 7.99)">Ordenar</button>
       </div>
       <div class="card">
         <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop&q=80" alt="Hamburguesa Dave's Single">
         <h3>Dave's Single</h3>
         <p class="price">$6.49</p>
-        <p>Clásica hamburguesa con carne fresca y queso.</p>
+        <p>Clásica hamburguesa con carne fresca y queso derretido.</p>
         <button onclick="addToCart('Dave\'s Single', 6.49)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=80" alt="Hamburguesa Sonoran BBQ">
-        <h3>Sonoran BBQ Double</h3>
-        <p class="price">$8.25</p>
-        <p>Doble carne de res, salsa BBQ y aros de cebolla.</p>
-        <button onclick="addToCart('Sonoran BBQ Double', 8.25)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&auto=format&fit=crop&q=80" alt="Triple Burger">
-        <h3>Dave's Triple</h3>
-        <p class="price">$8.99</p>
-        <p>Tres pisos de carne jugosa, queso derretido, lechuga y tomate.</p>
-        <button onclick="addToCart('Dave\'s Triple', 8.99)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&auto=format&fit=crop&q=80" alt="Jr. Bacon Cheeseburger">
-        <h3>Jr. Bacon Cheeseburger</h3>
-        <p class="price">$3.49</p>
-        <p>El tamaño perfecto con carne, queso y tocino crujiente.</p>
-        <button onclick="addToCart('Jr. Bacon Cheeseburger', 3.49)">Ordenar</button>
       </div>
     </div>
 
@@ -131,29 +172,8 @@
         <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500&auto=format&fit=crop&q=80" alt="Pollo Picante">
         <h3>Spicy Chicken Sandwich</h3>
         <p class="price">$5.99</p>
-        <p>Pechuga de pollo crujiente con un toque picante.</p>
+        <p>Pechuga de pollo súper crujiente y picante.</p>
         <button onclick="addToCart('Spicy Chicken Sandwich', 5.99)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=500&auto=format&fit=crop&q=80" alt="Nuggets de Pollo">
-        <h3>Crispy Chicken Nuggets</h3>
-        <p class="price">$3.89</p>
-        <p>10 piezas de nuggets de pollo dorados y crujientes.</p>
-        <button onclick="addToCart('Crispy Chicken Nuggets', 3.89)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=500&auto=format&fit=crop&q=80" alt="Asiago Ranch Chicken">
-        <h3>Asiago Ranch Club</h3>
-        <p class="price">$6.79</p>
-        <p>Pollo empanizado, queso Asiago, tocino y aderezo Ranch.</p>
-        <button onclick="addToCart('Asiago Ranch Club', 6.79)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1527477396000-e27a62285350?w=500&auto=format&fit=crop&q=80" alt="Chicken Tenders">
-        <h3>Classic Chicken Tenders</h3>
-        <p class="price">$4.99</p>
-        <p>Tiras de pechuga de pollo extra crujientes listas para dipear.</p>
-        <button onclick="addToCart('Classic Chicken Tenders', 4.99)">Ordenar</button>
       </div>
     </div>
 
@@ -162,77 +182,28 @@
         <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&auto=format&fit=crop&q=80" alt="Ensalada">
         <h3>Southwest Avocado Salad</h3>
         <p class="price">$6.49</p>
-        <p>Ensalada fresca con aguacate y pollo.</p>
+        <p>Ensalada fresca con aguacate, pollo y aderezo especial.</p>
         <button onclick="addToCart('Southwest Avocado Salad', 6.49)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=80" alt="Apple Pecan Salad">
-        <h3>Apple Pecan Salad</h3>
-        <p class="price">$6.99</p>
-        <p>Manzanas rojas y verdes, nueces tostadas y queso azul.</p>
-        <button onclick="addToCart('Apple Pecan Salad', 6.99)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=500&auto=format&fit=crop&q=80" alt="Parmesan Caesar Salad">
-        <h3>Parmesan Caesar Salad</h3>
-        <p class="price">$6.29</p>
-        <p>Pechuga de pollo a la plancha, parmesano y crutones crujientes.</p>
-        <button onclick="addToCart('Parmesan Caesar Salad', 6.29)">Ordenar</button>
       </div>
     </div>
 
     <div class="grid" id="drinks">
       <div class="card">
         <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=500&auto=format&fit=crop&q=80" alt="Frosty">
-        <h3>Frosty</h3>
+        <h3>Freddy's Frosty</h3>
         <p class="price">$2.49</p>
-        <p>Clásico postre helado de Wendy's.</p>
-        <button onclick="addToCart('Frosty', 2.49)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&auto=format&fit=crop&q=80" alt="Refresco de Máquina">
-        <h3>Refresco de Máquina</h3>
-        <p class="price">$1.85</p>
-        <p>Tu bebida favorita fría y rellenable en el kiosco.</p>
-        <button onclick="addToCart('Refresco de Máquina', 1.85)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500&auto=format&fit=crop&q=80" alt="Limonada Natural">
-        <h3>Strawberry Lemonade</h3>
-        <p class="price">$2.99</p>
-        <p>Limonada natural artesanal con un toque dulce de fresa.</p>
-        <button onclick="addToCart('Strawberry Lemonade', 2.99)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=500&auto=format&fit=crop&q=80" alt="Iced Tea">
-        <h3>Fresh Brewed Iced Tea</h3>
-        <p class="price">$1.99</p>
-        <p>Té negro frío recién hecho, refrescante y ligero.</p>
-        <button onclick="addToCart('Fresh Brewed Iced Tea', 1.99)">Ordenar</button>
+        <p>Nuestro clásico y cremoso postre helado batido.</p>
+        <button onclick="addToCart('Freddy\'s Frosty', 2.49)">Ordenar</button>
       </div>
     </div>
 
     <div class="grid" id="desserts">
       <div class="card">
         <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&auto=format&fit=crop&q=80" alt="Postre">
-        <h3>Cookies</h3>
+        <h3>Cookies de la Casa</h3>
         <p class="price">$1.99</p>
-        <p>Galletas recién horneadas.</p>
+        <p>Deliciosas galletas recién horneadas con chips de chocolate.</p>
         <button onclick="addToCart('Cookies', 1.99)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=80" alt="Chocolate Brownie">
-        <h3>Fudge Brownie</h3>
-        <p class="price">$2.49</p>
-        <p>Brownie denso de chocolate con chispas por encima.</p>
-        <button onclick="addToCart('Fudge Brownie', 2.49)">Ordenar</button>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&auto=format&fit=crop&q=80" alt="Apple Pie">
-        <h3>Apple Bites</h3>
-        <p class="price">$1.75</p>
-        <p>Pequeños bocados hojaldrados rellenos de manzana y canela.</p>
-        <button onclick="addToCart('Apple Bites', 1.75)">Ordenar</button>
       </div>
     </div>
   </div>
@@ -275,7 +246,7 @@
       if (cart.length === 0) {
         alert('Tu carrito está vacío.');
       } else {
-        alert('Gracias por tu compra. ¡Disfruta tu comida!');
+        alert('¡Gracias por tu compra! Prepárate para el show en Freddy Fazbear\'s Burgers.');
         clearCart();
       }
     }
